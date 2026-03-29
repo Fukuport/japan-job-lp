@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <title>일본 취업 지원 서비스 | 일본에서 새로운 커리어를</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --g1: #2d9e58; --g2: #4ecb71; --g3: #8fdfa8; --g4: #c6f0d4;
+            --g5: #e8f9ee; --g6: #f2fdf6; --text: #152315; --mid: #3a5c3a;
+            --light: #6b8c72; --border: #c6f0d4; --white: #ffffff;
+            --rad-lg: 20px; --rad-md: 14px; --t: 0.2s ease;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'DM Sans', 'Noto Sans JP', sans-serif; color: var(--text); line-height: 1.7; background: var(--g6); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        section { padding: 96px 0; }
+        .text-center { text-align: center; }
+        .section-label { display: inline-block; background: var(--g5); color: var(--g1); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; border: 1.5px solid var(--g4); margin-bottom: 14px; }
+        .section-title { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; color: var(--text); line-height: 1.3; letter-spacing: -0.025em; margin-bottom: 14px; }
+        .section-sub { font-size: 1rem; color: var(--mid); max-width: 580px; margin: 0 auto 52px; line-height: 1.75; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 15px 34px; border-radius: 999px; font-size: 0.97rem; font-weight: 700; text-decoration: none; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; letter-spacing: 0.01em; transition: transform var(--t), box-shadow var(--t), background var(--t); }
+        .btn-primary { background: var(--g1); color: #fff; box-shadow: 0 4px 18px rgba(45,158,88,0.28); }
+        .btn-primary:hover { background: #237044; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(45,158,88,0.35); }
+        .btn-ghost { background: transparent; color: var(--g1); border: 2px solid var(--g3); }
+        .btn-ghost:hover { background: var(--g5); transform: translateY(-2px); }
+        .cta-group { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+        .sticky-nav { position: fixed; top: 12px; left: 12px; right: 12px; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(18px); border: 1.5px solid var(--g4); border-radius: 999px; padding: 10px 0; box-shadow: 0 4px 24px rgba(45,158,88,0.08); }
+        .sticky-nav .container { display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-size: 1rem; font-weight: 700; color: var(--g1); text-decoration: none; letter-spacing: -0.02em; }
+        .nav-cta { padding: 9px 22px; font-size: 0.86rem; }
+        .hero { padding: 168px 0 96px; background: linear-gradient(160deg, #d4f5e2 0%, #e8faf0 45%, var(--g6) 100%); text-align: center; position: relative; overflow: hidden; }
+        .hero-blob { position: absolute; border-radius: 50%; pointer-events: none; opacity: 0.5; }
+        .hero-blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, #b8f0cc, transparent 70%); top: -180px; right: -120px; }
+        .hero-blob-2 { width: 340px; height: 340px; background: radial-gradient(circle, #c4f0d4, transparent 70%); bottom: -100px; left: -80px; }
+        .hero-badge { display: inline-block; background: var(--g4); color: var(--g1); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; padding: 7px 16px; border-radius: 999px; margin-bottom: 22px; border: 1.5px solid var(--g3); }
+        .hero-tagline { font-size: clamp(0.95rem, 1.8vw, 1.1rem); font-weight: 500; color: var(--g1); margin-bottom: 10px; letter-spacing: 0.01em; }
+        .hero h1 { font-size: clamp(2.3rem, 5.5vw, 4rem); font-weight: 700; line-height: 1.45; letter-spacing: -0.035em; margin-bottom: 20px; color: var(--text); position: relative; }
+        .hero h1 .accent { color: var(--g1); position: relative; }
+        .hero h1 .accent::after { content: ''; position: absolute; left: 0; right: 0; bottom: 2px; height: 4px; background: var(--g3); border-radius: 2px; }
+        .hero-sub { font-size: clamp(0.95rem, 1.7vw, 1.06rem); color: var(--mid); max-width: 500px; margin: 0 auto 42px; }
+        .hero-stats { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 52px; }
+        .hero-stat { background: #fff; border: 1.5px solid var(--g4); border-radius: var(--rad-md); padding: 18px 22px; min-width: 136px; text-align: center; box-shadow: 0 2px 12px rgba(45,158,88,0.07); transition: transform var(--t); }
+        .hero-stat:hover { transform: translateY(-3px); }
+        .hero-stat-num { font-size: 1.85rem; font-weight: 700; color: var(--g1); line-height: 1; letter-spacing: -0.03em; }
+        .hero-stat-label { font-size: 0.78rem; color: var(--light); margin-top: 6px; font-weight: 500; }
+        .card { background: #fff; border: 1.5px solid var(--border); border-radius: var(--rad-lg); padding: 28px 24px; transition: transform var(--t), box-shadow var(--t); }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(45,158,88,0.1); }
+        .card h3 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .card p { font-size: 0.9rem; color: var(--mid); line-height: 1.72; }
+        .card-icon { width: 44px; height: 44px; margin-bottom: 16px; display: block; }
+        .card-center { text-align: center; }
+        .card-center .card-icon { margin: 0 auto 16px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+        .grid-2b { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+        .worries-section { background: #fff; }
+        .worry-persona { margin-top: 44px; background: var(--g5); border: 1.5px solid var(--g4); border-radius: var(--rad-lg); padding: 32px 36px; }
+        .worry-persona h3 { font-size: 1rem; font-weight: 700; margin-bottom: 18px; }
+        .persona-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; list-style: none; }
+        .persona-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; color: var(--mid); }
+        .persona-dot { width: 20px; height: 20px; border-radius: 50%; background: var(--g2); color: #fff; font-size: 0.65rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+        .choice-section { background: var(--g6); }
+        .choice-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+        .choice-visual { background: #fff; border: 1.5px solid var(--border); border-radius: var(--rad-lg); padding: 44px 36px; text-align: center; }
+        .choice-visual .card-icon { width: 60px; height: 60px; margin: 0 auto 16px; }
+        .choice-visual h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+        .choice-visual p { font-size: 0.9rem; color: var(--mid); }
+        .choice-content .section-title { text-align: left; }
+        .choice-content p { color: var(--mid); font-size: 0.93rem; margin-top: 12px; line-height: 1.75; }
+        .choice-highlight { background: var(--g5); border-left: 3px solid var(--g2); border-radius: 0 var(--rad-md) var(--rad-md) 0; padding: 14px 18px; margin-top: 20px; }
+        .choice-highlight p { font-size: 0.9rem; color: var(--g1); font-weight: 600; margin: 0; }
+        .benefits-section { background: #fff; }
+        .services-section { background: var(--g6); }
+        .flow-section { background: #fff; }
+        .flow-wrapper { max-width: 720px; margin: 0 auto; position: relative; }
+        .flow-line { position: absolute; left: 21px; top: 22px; bottom: 22px; width: 2px; background: linear-gradient(to bottom, var(--g2), var(--g4)); border-radius: 2px; }
+        .flow-step { display: flex; gap: 22px; margin-bottom: 16px; position: relative; z-index: 1; }
+        .flow-step:last-child { margin-bottom: 0; }
+        .flow-num { width: 44px; height: 44px; border-radius: 50%; background: var(--g1); color: #fff; font-size: 1rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 0 4px var(--g5); }
+        .flow-body { background: #fff; border: 1.5px solid var(--border); border-radius: var(--rad-md); padding: 20px 22px; flex: 1; }
+        .flow-body h3 { font-size: 0.97rem; font-weight: 700; margin-bottom: 5px; }
+        .flow-body p { font-size: 0.88rem; color: var(--mid); }
+        .faq-section { background: var(--g6); }
+        .faq-wrapper { max-width: 720px; margin: 0 auto; }
+        .faq-item { background: #fff; border: 1.5px solid var(--border); border-radius: var(--rad-md); margin-bottom: 12px; overflow: hidden; }
+        .faq-question { padding: 18px 22px; display: flex; align-items: flex-start; gap: 12px; }
+        .faq-q-badge { width: 26px; height: 26px; border-radius: 50%; background: var(--g2); color: #fff; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .faq-question p { font-weight: 700; font-size: 0.95rem; color: var(--text); margin: 0; padding-top: 2px; }
+        .faq-answer { padding: 0 22px 18px 60px; font-size: 0.9rem; color: var(--mid); line-height: 1.72; }
+        .cta-section { background: var(--g1); text-align: center; padding: 96px 0; position: relative; overflow: hidden; }
+        .cta-section::before { content: ''; position: absolute; width: 700px; height: 700px; background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 65%); top: -250px; right: -150px; border-radius: 50%; pointer-events: none; }
+        .cta-section .section-label { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.25); }
+        .cta-section .section-title { color: #fff; font-size: clamp(1.8rem, 4vw, 2.8rem); position: relative; }
+        .cta-section .section-sub { color: rgba(255,255,255,0.78); position: relative; }
+        .cta-section .btn-primary { background: #fff; color: var(--g1); box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+        .cta-section .btn-primary:hover { background: var(--g5); box-shadow: 0 8px 28px rgba(0,0,0,0.16); }
+        .cta-section .btn-ghost { border-color: rgba(255,255,255,0.4); color: #fff; }
+        .cta-section .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+        .cta-note { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 20px; position: relative; }
+        footer { background: #0e1f0e; color: rgba(255,255,255,0.5); text-align: center; padding: 28px 0; font-size: 0.8rem; }
+        @media (max-width: 900px) { .choice-inner { grid-template-columns: 1fr; gap: 28px; } .choice-visual { order: -1; } }
+        @media (max-width: 640px) { section { padding: 64px 0; } .hero { padding: 132px 0 68px; } .hero-stats { gap: 10px; } .hero-stat { min-width: calc(50% - 5px); } .cta-group { flex-direction: column; align-items: stretch; } .btn { width: 100%; } .flow-line { display: none; } .worry-persona { padding: 24px 18px; } .faq-answer { padding-left: 20px; } .sticky-nav { top: 8px; left: 8px; right: 8px; } }
+    </style>
+</head>
+<body>
+    <nav class="sticky-nav">
+        <div class="container">
+            <a href="#" class="nav-logo">일본 취업 지원</a>
+            <a href="#contact" class="btn btn-primary nav-cta">상담하기</a>
+        </div>
+    </nav>
+    <section class="hero" id="top">
+        <div class="hero-blob hero-blob-1"></div>
+        <div class="hero-blob hero-blob-2"></div>
+        <div class="container">
+            <div class="hero-badge">한국인 엔지니어 대상 일본 취업 지원</div>
+            <p class="hero-tagline">지금 쌓아온 경력, 일본에서 더 크게 써먹어보세요.</p>
+            <h1>일본에서<br><span class="accent">엔지니어 커리어를 더 키워보세요</span></h1>
+            <p class="hero-sub">일본어로 어느 정도 소통이 가능하고, 개발 경력도 있다면 일본에는 지금보다 더 좋은 조건과 성장 기회를 기대할 수 있는 자리가 많습니다.</p>
+            <div class="cta-group">
+                <a href="#contact" class="btn btn-primary">무료 상담 신청</a>
+                <a href="#contact" class="btn btn-ghost">카카오톡으로 상담하기</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat"><div class="hero-stat-num">500+</div><div class="hero-stat-label">상담 실적</div></div>
+                <div class="hero-stat"><div class="hero-stat-num">200+</div><div class="hero-stat-label">제휴 기업 수</div></div>
+                <div class="hero-stat"><div class="hero-stat-num">90%</div><div class="hero-stat-label">서류·면접 통과율</div></div>
+                <div class="hero-stat"><div class="hero-stat-num">무료</div><div class="hero-stat-label">직무 특화</div></div>
+            </div>
+        </div>
+    </section>
+    <section class="worries-section">
+        <div class="container">
+            <div class="text-center" style="margin-bottom:44px;">
+                <span class="section-label">혹시 이런 고민, 해본 적 있나요?</span>
+                <h2 class="section-title">한국인 엔지니어가 많이 느끼는<br>커리어의 답답함</h2>
+                <p class="section-sub">비슷한 고민을 하는 한국인 엔지니어가 정말 많습니다. 혼자만의 고민이 아닙니다.</p>
+            </div>
+            <div class="grid-4">
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><path d="M12 33c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="#4ecb71" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="18" r="5" stroke="#2d9e58" stroke-width="2"/><path d="M31 13l3-3M33 19h3" stroke="#4ecb71" stroke-width="1.8" stroke-linecap="round"/></svg><h3>치열한 취업 경쟁</h3><p>한국에서 엔지니어로 일하고 있어도 연봉, 개발 문화, 성장 속도에서 아쉬움을 느끼는 경우가 많습니다. 내 기술을 더 제대로 인정받는 환경에서 일하고 싶다는 생각이 들기도 하죠.</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><path d="M11 33V25M17 33V19M23 33V23M29 33V15" stroke="#4ecb71" stroke-width="2.2" stroke-linecap="round"/><path d="M9 17l5 4 5-3 5 4 5-5" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>커리어 정체</h3><p>경력은 쌓였는데 다음 단계가 잘 안 보입니다. 어떤 기술을 더 파야 할지, 어떤 회사로 가야 할지 애매해서 이대로 괜찮을지 불안해질 때가 있습니다.</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><circle cx="22" cy="22" r="9" stroke="#4ecb71" stroke-width="1.8"/><path d="M22 13v-3M22 34v3M13 22h-3M34 22h3" stroke="#4ecb71" stroke-width="1.8" stroke-linecap="round"/><path d="M18 22c0-2.21 1.79-4 4-4s4 1.79 4 4-1.79 4-4 4" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/></svg><h3>해외 커리어에 대한 관심</h3><p>일본어는 어느 정도 되고 개발 경험도 있는데, 막상 일본 취업은 어떻게 준비해야 하는지 잘 모르겠는 경우가 많습니다. 무엇부터 해야 할지 막막하게 느껴질 수 있습니다.</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><circle cx="22" cy="22" r="9" stroke="#4ecb71" stroke-width="1.8"/><path d="M22 16v7l5 3" stroke="#2d9e58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>앞으로의 커리어 불안</h3><p>지금 회사에서는 내 기술력이 생각만큼 평가받지 못한다고 느껴질 수 있습니다. 더 좋은 개발 환경으로 옮기고 싶지만, 현실적으로 어떻게 움직여야 할지 고민이 됩니다.</p></div>
+            </div>
+            <div class="worry-persona">
+                <h3>이런 분들이 많이 상담을 신청합니다</h3>
+                <ul class="persona-list">
+                    <li><span class="persona-dot">✓</span>JLPT N2 수준 이상의 일본어가 가능한 엔지니어 경력자</li>
+                    <li><span class="persona-dot">✓</span>백엔드, 프론트엔드, 모바일, QA, 인프라 경험이 있는 분</li>
+                    <li><span class="persona-dot">✓</span>일본에서 엔지니어로 일하고 싶지만 방법을 잘 모르는 분</li>
+                    <li><span class="persona-dot">✓</span>일본어로 업무와 면접에 도전해보고 싶은 분</li>
+                    <li><span class="persona-dot">✓</span>일본 기업의 개발 환경과 업무 방식에 관심이 있는 분</li>
+                    <li><span class="persona-dot">✓</span>엔지니어로서 더 많은 기회와 성장을 원하시는 분</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="choice-section">
+        <div class="container">
+            <div class="choice-inner">
+                <div class="choice-visual">
+                    <svg class="card-icon" viewBox="0 0 60 60" fill="none"><rect width="60" height="60" rx="16" fill="#e8f9ee"/><path d="M16 50c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#4ecb71" stroke-width="2.2" stroke-linecap="round"/><circle cx="30" cy="24" r="8" stroke="#2d9e58" stroke-width="2.2"/><path d="M42 20l5-5M44 28h5M39 14l4-4" stroke="#4ecb71" stroke-width="2" stroke-linecap="round"/></svg>
+                    <h3>일본은 지금 해외 엔지니어 채용에도 적극적입니다</h3>
+                    <p style="margin-top:10px;">일본은 계속해서 엔지니어가 부족한 상황입니다. 그래서 일본어로 소통이 가능하고 실무 경험이 있는 한국인 엔지니어에 대한 관심도 꾸준히 높아지고 있습니다. 실제로 기술력과 업무 대응력을 높게 보는 기업도 많습니다.</p>
+                </div>
+                <div class="choice-content">
+                    <span class="section-label">새로운 선택지</span>
+                    <h2 class="section-title">일본에서 일한다는<br>새로운 선택</h2>
+                    <p>한국의 개발 시장만이 전부는 아닙니다. 일본에도 일본어 실력과 엔지니어 경험을 살릴 수 있는 자리가 충분히 있습니다.</p>
+                    <p>일본어로 소통할 수 있다는 건 분명한 강점입니다. 일본의 개발 현장에서 일하면서 기술도, 커리어도 한 단계 더 키워갈 수 있습니다.</p>
+                    <div class="choice-highlight"><p>일본어 실력을 살릴 수 있고, 실제로 엔지니어 포지션으로 연결되기 좋은 채용 공고를 중심으로 안내해드립니다.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="benefits-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="section-label">일본에서 일할 때의 장점</span>
+                <h2 class="section-title">일본에서의 엔지니어 경험이<br>가져오는 변화</h2>
+                <p class="section-sub">일본에서의 엔지니어 경험은 앞으로의 커리어 방향을 크게 바꿔줄 수 있습니다.</p>
+            </div>
+            <div class="grid-2b">
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><path d="M12 35V21l10-8 10 8v14" stroke="#4ecb71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="18" y="26" width="8" height="9" rx="1.5" stroke="#2d9e58" stroke-width="1.8"/></svg><h3>커리어 성장</h3><p>일본 기업에서의 개발 실무 경험은 이후 커리어를 넓히는 데 확실한 강점이 됩니다.</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><path d="M14 22c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8" stroke="#4ecb71" stroke-width="1.8" stroke-linecap="round"/><path d="M18 18h8M18 22h6M18 26h4" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/></svg><h3>언어를 살릴 수 있는 일</h3><p>한국어와 일본어를 함께 활용해 브리지 역할이나 글로벌 개발 환경에서 강점을 만들 수 있습니다. 언어 실력이 바로 커리어 경쟁력이 될 수 있습니다.</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><circle cx="22" cy="22" r="9" stroke="#4ecb71" stroke-width="1.8"/><path d="M22 13c0 0-4 4-4 9s4 9 4 9M22 13c0 0 4 4 4 9s-4 9-4 9M13 22h18" stroke="#2d9e58" stroke-width="1.6" stroke-linecap="round"/></svg><h3>국제적인 경험</h3><p>일본의 개발 현장에서 일하는 경험은 시야를 넓혀주고, 실무 대응력도 훨씬 단단하게 만들어줍니다.</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><rect x="12" y="18" width="20" height="14" rx="3" stroke="#4ecb71" stroke-width="1.8"/><path d="M17 18v-2a5 5 0 0110 0v2M22 25v-2" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/><circle cx="22" cy="26" r="1.5" fill="#2d9e58"/></svg><h3>안정적인 수입과 생활</h3><p>안정적인 고용 환경 속에서 엔지니어로서의 경험을 더 탄탄하게 쌓아갈 수 있습니다.</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><circle cx="22" cy="22" r="5" stroke="#2d9e58" stroke-width="1.8"/><circle cx="13" cy="16" r="3" stroke="#4ecb71" stroke-width="1.6"/><circle cx="31" cy="16" r="3" stroke="#4ecb71" stroke-width="1.6"/><circle cx="13" cy="28" r="3" stroke="#4ecb71" stroke-width="1.6"/><circle cx="31" cy="28" r="3" stroke="#4ecb71" stroke-width="1.6"/><path d="M16 18l4 3M28 18l-4 3M16 26l4-3M28 26l-4-3" stroke="#4ecb71" stroke-width="1.3"/></svg><h3>글로벌 네트워크</h3><p>일본 안팎의 엔지니어, 기업과의 연결은 나중에 정말 큰 자산이 됩니다.</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><path d="M16 30c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="#4ecb71" stroke-width="1.8" stroke-linecap="round"/><path d="M22 10c6.627 0 12 5.373 12 12" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/><path d="M22 14c4.418 0 8 3.582 8 8" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/><circle cx="22" cy="18" r="2.5" fill="#4ecb71"/></svg><h3>새로운 생활과 문화 경험</h3><p>한국과 거리가 아주 멀지 않다는 점도 장점입니다. 생활 부담을 너무 크게 느끼지 않으면서 일본에서 커리어를 만들어갈 수 있습니다.</p></div>
+            </div>
+        </div>
+    </section>
+    <section class="services-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="section-label">지원 내용</span>
+                <h2 class="section-title">엔지니어를 위한 지원 내용</h2>
+                <p class="section-sub">일본에서 엔지니어로 일하기 위해 필요한 과정을 처음부터 끝까지 함께합니다.</p>
+            </div>
+            <div class="grid-3">
+                <div class="card card-center"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><rect x="11" y="11" width="22" height="24" rx="3" stroke="#4ecb71" stroke-width="1.8"/><path d="M16 18h12M16 23h12M16 28h8" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/></svg><h3>채용 공고 소개</h3><p>일본어로 소통 가능한 엔지니어를 찾는 일본 기업을 소개해드립니다. 당신의 기술 스택과 희망 조건에 맞는 회사를 함께 찾아드립니다.</p></div>
+                <div class="card card-center"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><path d="M14 30c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="#4ecb71" stroke-width="1.8" stroke-linecap="round"/><circle cx="22" cy="18" r="5" stroke="#2d9e58" stroke-width="1.8"/></svg><h3>커리어 상담</h3><p>개발 경험, 사용 기술, 일본어 실력, 희망 조건을 꼼꼼히 확인한 뒤 지금 시점에서 현실적으로 갈 수 있는 방향을 함께 정리합니다.</p></div>
+                <div class="card card-center"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><rect x="12" y="10" width="20" height="26" rx="2.5" stroke="#4ecb71" stroke-width="1.8"/><path d="M16 17h12M16 22h12M16 27h8" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/></svg><h3>이력서·경력기술서 지원</h3><p>일본 채용 담당자에게 잘 전달되도록 이력서, 경력기술서, 기술 설명 방식까지 함께 다듬어드립니다.</p></div>
+                <div class="card card-center"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><rect x="11" y="16" width="22" height="16" rx="3" stroke="#4ecb71" stroke-width="1.8"/><circle cx="18" cy="24" r="2.5" stroke="#2d9e58" stroke-width="1.6"/><path d="M24 20h6M24 24h6M24 28h4" stroke="#2d9e58" stroke-width="1.6" stroke-linecap="round"/></svg><h3>면접 준비</h3><p>일본 엔지니어 면접에서 자주 나오는 질문과 기술 설명 방법을 함께 연습합니다. 온라인 모의면접으로 실전 감각까지 잡을 수 있습니다.</p></div>
+                <div class="card card-center"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><path d="M18 34l-8-10h6V12h8v12h6L18 34z" stroke="#4ecb71" stroke-width="1.8" stroke-linejoin="round"/><path d="M30 26h4M32 22v8" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/></svg><h3>출국·정착 지원</h3><p>비자 준비부터 주거, 일본 생활 준비까지 취업 이후의 시작도 꼼꼼하게 도와드립니다.</p></div>
+            </div>
+        </div>
+    </section>
+    <section class="flow-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="section-label">진행 절차</span>
+                <h2 class="section-title">일본에서 엔지니어로 일하게 되기까지의 흐름</h2>
+                <p class="section-sub">상담부터 내정까지, 엔지니어 지원자에게 맞춰 단계별로 꼼꼼하게 도와드립니다.</p>
+            </div>
+            <div class="flow-wrapper">
+                <div class="flow-line"></div>
+                <div class="flow-step"><div class="flow-num">1</div><div class="flow-body"><h3>상담 및 커리어 진단</h3><p>먼저 온라인으로 편하게 상담해보세요. 개발 경험, 사용 언어, 일본어 실력, 희망 조건을 듣고 일본 취업 가능성을 함께 살펴봅니다.</p></div></div>
+                <div class="flow-step"><div class="flow-num">2</div><div class="flow-body"><h3>맞춤형 채용 공고 제안</h3><p>개발 스킬과 경력에 맞는 일본 기업의 채용 공고를 제안합니다. 백엔드, 프론트엔드, 모바일, 인프라 등 기술 영역까지 고려해 가장 잘 맞는 선택지를 안내합니다.</p></div></div>
+                <div class="flow-step"><div class="flow-num">3</div><div class="flow-body"><h3>서류 작성·지원 지원</h3><p>일본식 이력서와 경력기술서 작성을 도와드립니다. 엔지니어 직무에 맞게 서류 첨삭과 개선 포인트도 함께 안내합니다.</p></div></div>
+                <div class="flow-step"><div class="flow-num">4</div><div class="flow-body"><h3>면접 준비</h3><p>일본 엔지니어 면접에서 자주 나오는 질문과 기술 설명 방식을 미리 연습합니다. 온라인 모의면접으로 자신감을 키울 수 있습니다.</p></div></div>
+                <div class="flow-step"><div class="flow-num">5</div><div class="flow-body"><h3>내정 후 출국 준비 지원</h3><p>내정 후에도 안심할 수 있도록 비자 준비, 출국 준비, 일본 생활 시작까지 계속 지원합니다.</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="section-label">채용 예시</span>
+                <h2 class="section-title">실제로 많이 보는 조건을 바탕으로 한<br>엔지니어 채용 예시</h2>
+                <p class="section-sub">아래 내용은 실제 공개 채용 공고에서 자주 보이는 조건을 바탕으로 정리한 참고 예시입니다. 시기와 기업에 따라 달라질 수 있지만, 대략적인 기준을 잡는 용도로 참고해 주세요.</p>
+            </div>
+            <div class="grid-3">
+                <div class="card card-center">
+                    <h3>백엔드 / 웹 개발</h3>
+                    <p><strong>요구 수준</strong><br>실무 2~5년 정도 / Java·Python·Node.js 등 개발 경험 / 일본어 N2 전후</p>
+                    <p style="margin-top:12px;"><strong>예상 연봉</strong><br>약 4,700만~9,400만 원</p>
+                    <p style="margin-top:12px;"><strong>복지 예시</strong><br>플렉스 근무, 재택 가능, 각종 사회보험, 교통비 지원, 비자 지원</p>
+                </div>
+                <div class="card card-center">
+                    <h3>인프라 / 네트워크</h3>
+                    <p><strong>요구 수준</strong><br>실무 반년~3년 정도 / 운영·보수·모니터링·네트워크 대응 경험 / 일본어 N2 전후</p>
+                    <p style="margin-top:12px;"><strong>예상 연봉</strong><br>약 3,800만~7,500만 원</p>
+                    <p style="margin-top:12px;"><strong>복지 예시</strong><br>자격증 지원, 교육 제도, 일부 주거 보조, 비자 지원</p>
+                </div>
+                <div class="card card-center">
+                    <h3>개발 엔지니어 / 사내 SE</h3>
+                    <p><strong>요구 수준</strong><br>실무 1~3년 정도 / C#·SQL·웹 애플리케이션 개발 경험 등 / 일본어 N2 전후</p>
+                    <p style="margin-top:12px;"><strong>예상 연봉</strong><br>약 3,300만~7,500만 원</p>
+                    <p style="margin-top:12px;"><strong>복지 예시</strong><br>사회보험, 상여금, 초과근무수당, 교육, 입사 후 팔로업</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="section-label">자주 받는 질문</span>
+                <h2 class="section-title">FAQ</h2>
+                <p class="section-sub">상담 전에 많이 물어보시는 내용들을 먼저 정리해두었습니다.</p>
+            </div>
+            <div class="faq-wrapper">
+                <div class="faq-item"><div class="faq-question"><div class="faq-q-badge">Q</div><p>N2 수준인데, 기술 면접이나 일본어 설명이 아직 자신 없어도 지원할 수 있나요?</p></div><div class="faq-answer">네, 가능합니다. 이번에는 N2 수준 이상을 기준으로 한 채용 공고가 중심이지만, 완벽한 경어보다 실무 커뮤니케이션 능력과 엔지니어로서의 기술력을 더 중요하게 보는 기업도 많습니다. 면접에서 어떻게 말하고 답해야 하는지는 저희가 충분히 도와드립니다.</div></div>
+                <div class="faq-item"><div class="faq-question"><div class="faq-q-badge">Q</div><p>상담이나 등록에 비용이 드나요?</p></div><div class="faq-answer">구직자분들을 위한 상담과 지원은 모두 무료입니다. 별도의 비용은 전혀 들지 않으니 부담 없이 문의해 주세요.</div></div>
+                <div class="faq-item"><div class="faq-question"><div class="faq-q-badge">Q</div><p>일본에서 일한 경험이 없어도 괜찮나요?</p></div><div class="faq-answer">물론입니다. 일본 취업이 처음이어도 문제없습니다. 생활과 문화적인 부분까지 함께 안내해드리며, 면접도 대부분 온라인으로 진행되어 출국 전에 내정을 받는 경우도 많습니다.</div></div>
+                <div class="faq-item"><div class="faq-question"><div class="faq-q-badge">Q</div><p>어떤 채용 공고가 있나요?</p></div><div class="faq-answer">주로 백엔드, 프론트엔드, 모바일, QA, 인프라, 사내 SE, SRE, PM 보조 등의 포지션을 다루고 있습니다. 경력에 맞는 공고를 함께 찾아드립니다.</div></div>
+                <div class="faq-item"><div class="faq-question"><div class="faq-q-badge">Q</div><p>상담부터 내정까지 보통 얼마나 걸리나요?</p></div><div class="faq-answer">개인 상황에 따라 다르지만 보통 2~4개월 정도를 예상하시면 됩니다. 조금 더 빠르게 진행하고 싶은 경우에는 그에 맞춰 지원해드립니다.</div></div>
+
+                <div class="faq-item"><div class="faq-question"><div class="faq-q-badge">Q</div><p>어느 정도의 일본어 실력이 필요하나요?</p></div><div class="faq-answer">일상 회화 수준의 일본어가 가능하면 지원할 수 있는 공고도 있습니다. 면접에서 어떻게 답해야 할지, 자신을 어떻게 설명해야 할지 걱정되는 분도 괜찮습니다. 일본 기업은 기술뿐 아니라 사람의 인상이나 함께 일하기 편한지도 중요하게 보는 경우가 많아서, 그런 부분까지 포함해 면접 준비와 전달 방식까지 저희가 꼼꼼하게 도와드립니다.</div></div>
+
+            </div>
+        </div>
+    </section>
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <span class="section-label">무료 상담 접수 중</span>
+            <h2 class="section-title">먼저 가볍게 상담부터 시작해보세요</h2>
+            <p class="section-sub">앞으로의 커리어 가능성을 넓혀보는 첫걸음으로,<br>무료 상담을 통해 일본 취업 방향을 함께 정리해보세요.</p>
+            <div class="cta-group">
+                <a href="#" class="btn btn-primary" style="font-size:1.05rem; padding:17px 42px;">무료 상담 신청</a>
+                <a href="#" class="btn btn-ghost" style="font-size:1.05rem; padding:17px 42px;">카카오톡으로 상담하기</a>
+            </div>
+            <p class="cta-note">※ 상담과 등록은 모두 무료이며, 부담을 주는 식의 영업은 하지 않습니다.</p>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 한국인 엔지니어 대상 일본 취업 지원 서비스. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
