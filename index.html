@@ -3,949 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     <title>日本就職支援サービス | 新しいキャリアを日本で</title>
     <style>
-        /* ===== RESET & BASE ===== */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
-            --blue-dark:   #0a2e6e;
-            --blue-main:   #1a56db;
-            --blue-light:  #e8f0fe;
-            --yellow:      #FEE500;
-            --yellow-dark: #e6cf00;
-            --gray-bg:     #f7f9fc;
-            --gray-border: #e0e6ef;
-            --text-dark:   #1a1a2e;
-            --text-mid:    #4a5568;
-            --text-light:  #718096;
-            --white:       #ffffff;
-            --shadow-sm:   0 2px 8px rgba(0,0,0,0.06);
-            --shadow-md:   0 6px 24px rgba(0,0,0,0.10);
-            --shadow-lg:   0 12px 40px rgba(0,0,0,0.14);
-            --radius:      12px;
-            --transition:  0.25s ease;
+            --g1: #2d9e58; --g2: #4ecb71; --g3: #8fdfa8; --g4: #c6f0d4;
+            --g5: #e8f9ee; --g6: #f2fdf6; --text: #152315; --mid: #3a5c3a;
+            --light: #6b8c72; --border: #c6f0d4; --white: #ffffff;
+            --rad-lg: 20px; --rad-md: 14px; --t: 0.2s ease;
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
-            color: var(--text-dark);
-            line-height: 1.7;
-            background: var(--white);
-        }
-
-        img { max-width: 100%; display: block; }
-
-        /* ===== LAYOUT ===== */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        section {
-            padding: 96px 0;
-        }
-
-        .section-label {
-            display: inline-block;
-            background: var(--blue-light);
-            color: var(--blue-main);
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            padding: 5px 14px;
-            border-radius: 50px;
-            margin-bottom: 16px;
-        }
-
-        .section-title {
-            font-size: clamp(1.6rem, 3vw, 2.2rem);
-            font-weight: 800;
-            color: var(--text-dark);
-            margin-bottom: 16px;
-            line-height: 1.3;
-        }
-
-        .section-sub {
-            font-size: 1.05rem;
-            color: var(--text-mid);
-            max-width: 600px;
-            margin: 0 auto 56px;
-            text-align: center;
-        }
-
+        html { scroll-behavior: smooth; }
+        body { font-family: 'DM Sans', 'Noto Sans JP', sans-serif; color: var(--text); line-height: 1.7; background: var(--g6); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        section { padding: 96px 0; }
         .text-center { text-align: center; }
-
-        /* ===== BUTTONS ===== */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 16px 36px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 700;
-            text-decoration: none;
-            transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
-            cursor: pointer;
-            border: none;
-            white-space: nowrap;
-        }
-
-        .btn-primary {
-            background: var(--blue-main);
-            color: var(--white);
-            box-shadow: 0 4px 16px rgba(26,86,219,0.35);
-        }
-
-        .btn-primary:hover {
-            background: var(--blue-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(26,86,219,0.45);
-        }
-
-        .btn-kakao {
-            background: var(--yellow);
-            color: #1a1a1a;
-            box-shadow: 0 4px 16px rgba(254,229,0,0.4);
-        }
-
-        .btn-kakao:hover {
-            background: var(--yellow-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(254,229,0,0.5);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid rgba(255,255,255,0.7);
-        }
-
-        .btn-outline:hover {
-            background: rgba(255,255,255,0.15);
-            transform: translateY(-2px);
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        /* ===== STICKY NAV ===== */
-        .sticky-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--gray-border);
-            padding: 14px 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .sticky-nav .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-        }
-
-        .nav-logo {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--blue-main);
-            text-decoration: none;
-        }
-
-        .nav-cta {
-            padding: 10px 24px;
-            font-size: 0.9rem;
-        }
-
-        /* ===== 1. HERO ===== */
-        .hero {
-            padding: 160px 0 100px;
-            background: linear-gradient(135deg, var(--blue-dark) 0%, #1a56db 60%, #2563eb 100%);
-            color: var(--white);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: var(--white);
-            font-size: 0.82rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            padding: 6px 18px;
-            border-radius: 50px;
-            margin-bottom: 28px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            font-weight: 900;
-            line-height: 1.2;
-            margin-bottom: 24px;
-            letter-spacing: -0.02em;
-        }
-
-        .hero h1 span {
-            color: var(--yellow);
-        }
-
-        .hero-sub {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: rgba(255,255,255,0.85);
-            max-width: 560px;
-            margin: 0 auto 48px;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 40px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 64px;
-            padding-top: 48px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .hero-stat {
-            text-align: center;
-        }
-
-        .hero-stat-num {
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: var(--yellow);
-            line-height: 1;
-        }
-
-        .hero-stat-label {
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.75);
-            margin-top: 6px;
-        }
-
-        /* ===== 2. WORRIES ===== */
-        .worries-section {
-            background: var(--gray-bg);
-        }
-
-        .worries-intro {
-            text-align: center;
-            margin-bottom: 56px;
-        }
-
-        .worries-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-        }
-
-        .worry-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 32px 28px;
-            box-shadow: var(--shadow-sm);
-            border-left: 4px solid var(--blue-main);
-            transition: transform var(--transition), box-shadow var(--transition);
-        }
-
-        .worry-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .worry-icon {
-            font-size: 2rem;
-            margin-bottom: 16px;
-        }
-
-        .worry-card h3 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-dark);
-        }
-
-        .worry-card p {
-            font-size: 0.95rem;
-            color: var(--text-mid);
-            line-height: 1.6;
-        }
-
-        .worry-persona {
-            margin-top: 56px;
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 40px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .worry-persona h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-            color: var(--text-dark);
-            text-align: center;
-        }
-
-        .persona-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 16px;
-            list-style: none;
-        }
-
-        .persona-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            font-size: 0.95rem;
-            color: var(--text-mid);
-        }
-
-        .persona-list li::before {
-            content: '✓';
-            color: var(--blue-main);
-            font-weight: 700;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        /* ===== 3. CHOICE ===== */
-        .choice-section {
-            background: var(--white);
-        }
-
-        .choice-inner {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 64px;
-            align-items: center;
-        }
-
-        .choice-visual {
-            background: linear-gradient(135deg, var(--blue-light) 0%, #dbeafe 100%);
-            border-radius: 20px;
-            padding: 48px 40px;
-            text-align: center;
-        }
-
-        .choice-visual-icon {
-            font-size: 5rem;
-            margin-bottom: 24px;
-        }
-
-        .choice-visual h3 {
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: var(--blue-dark);
-            margin-bottom: 12px;
-        }
-
-        .choice-visual p {
-            font-size: 0.95rem;
-            color: var(--text-mid);
-        }
-
-        .choice-content .section-label { display: block; }
-
-        .choice-content .section-title {
-            text-align: left;
-        }
-
-        .choice-content p {
-            color: var(--text-mid);
-            margin-bottom: 24px;
-        }
-
-        .choice-highlight {
-            background: var(--blue-light);
-            border-radius: var(--radius);
-            padding: 20px 24px;
-            margin-top: 24px;
-        }
-
-        .choice-highlight p {
-            font-size: 0.95rem;
-            color: var(--blue-dark);
-            font-weight: 600;
-            margin: 0;
-        }
-
-        /* ===== 4. BENEFITS ===== */
-        .benefits-section {
-            background: var(--blue-dark);
-            color: var(--white);
-        }
-
-        .benefits-section .section-title {
-            color: var(--white);
-        }
-
-        .benefits-section .section-sub {
-            color: rgba(255,255,255,0.75);
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 28px;
-        }
-
-        .benefit-card {
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: var(--radius);
-            padding: 36px 32px;
-            transition: background var(--transition), transform var(--transition);
-        }
-
-        .benefit-card:hover {
-            background: rgba(255,255,255,0.12);
-            transform: translateY(-4px);
-        }
-
-        .benefit-icon {
-            font-size: 2.4rem;
-            margin-bottom: 20px;
-        }
-
-        .benefit-card h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--yellow);
-            margin-bottom: 12px;
-        }
-
-        .benefit-card p {
-            font-size: 0.95rem;
-            color: rgba(255,255,255,0.8);
-            line-height: 1.7;
-        }
-
-        /* ===== 5. SERVICES ===== */
-        .services-section {
-            background: var(--gray-bg);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px;
-        }
-
-        .service-card {
-            background: var(--white);
-            border-radius: var(--radius);
-            padding: 36px 28px;
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            transition: transform var(--transition), box-shadow var(--transition);
-        }
-
-        .service-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .service-icon {
-            font-size: 2.6rem;
-            margin-bottom: 18px;
-        }
-
-        .service-card h3 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-        }
-
-        .service-card p {
-            font-size: 0.9rem;
-            color: var(--text-mid);
-            line-height: 1.6;
-        }
-
-        /* ===== 6. FLOW ===== */
-        .flow-section {
-            background: var(--white);
-        }
-
-        .flow-wrapper {
-            max-width: 720px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .flow-line {
-            position: absolute;
-            left: 28px;
-            top: 28px;
-            bottom: 28px;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--blue-main), var(--blue-light));
-            z-index: 0;
-        }
-
-        .flow-step {
-            display: flex;
-            gap: 28px;
-            margin-bottom: 28px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .flow-step:last-child {
-            margin-bottom: 0;
-        }
-
-        .flow-num {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: var(--blue-main);
-            color: var(--white);
-            font-size: 1.2rem;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            box-shadow: 0 0 0 6px var(--white), 0 0 0 8px var(--blue-light);
-        }
-
-        .flow-body {
-            background: var(--gray-bg);
-            border-radius: var(--radius);
-            padding: 24px 28px;
-            flex: 1;
-        }
-
-        .flow-body h3 {
-            font-size: 1.05rem;
-            font-weight: 700;
-            color: var(--blue-main);
-            margin-bottom: 6px;
-        }
-
-        .flow-body p {
-            font-size: 0.95rem;
-            color: var(--text-mid);
-            margin: 0;
-        }
-
-        /* ===== 7. FAQ ===== */
-        .faq-section {
-            background: var(--gray-bg);
-        }
-
-        .faq-wrapper {
-            max-width: 760px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background: var(--white);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            margin-bottom: 16px;
-        }
-
-        .faq-question {
-            padding: 22px 28px;
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .faq-q-badge {
-            background: var(--blue-main);
-            color: var(--white);
-            font-size: 0.85rem;
-            font-weight: 700;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .faq-question p {
-            font-weight: 600;
-            color: var(--text-dark);
-            font-size: 1rem;
-            margin: 0;
-            padding-top: 2px;
-        }
-
-        .faq-answer {
-            padding: 0 28px 22px 72px;
-            font-size: 0.95rem;
-            color: var(--text-mid);
-            line-height: 1.7;
-        }
-
-        /* ===== 8. CTA ===== */
-        .cta-section {
-            background: linear-gradient(135deg, var(--blue-dark) 0%, #1a56db 100%);
-            color: var(--white);
-            text-align: center;
-            padding: 96px 0;
-        }
-
-        .cta-section .section-title {
-            color: var(--white);
-            font-size: clamp(1.8rem, 4vw, 2.6rem);
-        }
-
-        .cta-section .section-sub {
-            color: rgba(255,255,255,0.8);
-        }
-
-        .cta-note {
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.6);
-            margin-top: 20px;
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            background: #0d1b36;
-            color: rgba(255,255,255,0.5);
-            text-align: center;
-            padding: 32px 0;
-            font-size: 0.85rem;
-        }
-
-        footer a {
-            color: rgba(255,255,255,0.5);
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            color: var(--white);
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 900px) {
-            .choice-inner {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .choice-visual { order: -1; }
-        }
-
-        @media (max-width: 640px) {
-            section { padding: 64px 0; }
-            .hero { padding: 120px 0 72px; }
-            .hero-stats { gap: 24px; }
-            .cta-group { flex-direction: column; align-items: stretch; }
-            .btn { width: 100%; }
-            .flow-line { display: none; }
-            .flow-num { width: 44px; height: 44px; font-size: 1rem; }
-            .worry-persona { padding: 28px 20px; }
-            .faq-answer { padding-left: 28px; }
-        }
+        .section-label { display: inline-block; background: var(--g5); color: var(--g1); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; border: 1.5px solid var(--g4); margin-bottom: 14px; }
+        .section-title { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; color: var(--text); line-height: 1.3; letter-spacing: -0.025em; margin-bottom: 14px; }
+        .section-sub { font-size: 1rem; color: var(--mid); max-width: 580px; margin: 0 auto 52px; line-height: 1.75; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 15px 34px; border-radius: 999px; font-size: 0.97rem; font-weight: 700; text-decoration: none; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; letter-spacing: 0.01em; transition: transform var(--t), box-shadow var(--t), background var(--t); }
+        .btn-primary { background: var(--g1); color: #fff; box-shadow: 0 4px 18px rgba(45,158,88,0.28); }
+        .btn-primary:hover { background: #237044; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(45,158,88,0.35); }
+        .btn-ghost { background: transparent; color: var(--g1); border: 2px solid var(--g3); }
+        .btn-ghost:hover { background: var(--g5); transform: translateY(-2px); }
+        .cta-group { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+        .sticky-nav { position: fixed; top: 12px; left: 12px; right: 12px; z-index: 100; background: rgba(255,255,255,0.96); backdrop-filter: blur(18px); border: 1.5px solid var(--g4); border-radius: 999px; padding: 10px 0; box-shadow: 0 4px 24px rgba(45,158,88,0.08); }
+        .sticky-nav .container { display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-size: 1rem; font-weight: 700; color: var(--g1); text-decoration: none; letter-spacing: -0.02em; }
+        .nav-cta { padding: 9px 22px; font-size: 0.86rem; }
+        .hero { padding: 168px 0 96px; background: linear-gradient(160deg, #d4f5e2 0%, #e8faf0 45%, var(--g6) 100%); text-align: center; position: relative; overflow: hidden; }
+        .hero-blob { position: absolute; border-radius: 50%; pointer-events: none; opacity: 0.5; }
+        .hero-blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, #b8f0cc, transparent 70%); top: -180px; right: -120px; }
+        .hero-blob-2 { width: 340px; height: 340px; background: radial-gradient(circle, #c4f0d4, transparent 70%); bottom: -100px; left: -80px; }
+        .hero-badge { display: inline-block; background: var(--g4); color: var(--g1); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; padding: 7px 16px; border-radius: 999px; margin-bottom: 22px; border: 1.5px solid var(--g3); }
+        .hero-tagline { font-size: clamp(0.95rem, 1.8vw, 1.1rem); font-weight: 500; color: var(--g1); margin-bottom: 10px; letter-spacing: 0.01em; }
+        .hero h1 { font-size: clamp(2.3rem, 5.5vw, 4rem); font-weight: 700; line-height: 1.45; letter-spacing: -0.035em; margin-bottom: 20px; color: var(--text); position: relative; }
+        .hero h1 .accent { color: var(--g1); position: relative; }
+        .hero h1 .accent::after { content: ''; position: absolute; left: 0; right: 0; bottom: 2px; height: 4px; background: var(--g3); border-radius: 2px; }
+        .hero-sub { font-size: clamp(0.95rem, 1.7vw, 1.06rem); color: var(--mid); max-width: 500px; margin: 0 auto 42px; }
+        .hero-stats { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 52px; }
+        .hero-stat { background: #fff; border: 1.5px solid var(--g4); border-radius: var(--rad-md); padding: 18px 22px; min-width: 136px; text-align: center; box-shadow: 0 2px 12px rgba(45,158,88,0.07); transition: transform var(--t); }
+        .hero-stat:hover { transform: translateY(-3px); }
+        .hero-stat-num { font-size: 1.85rem; font-weight: 700; color: var(--g1); line-height: 1; letter-spacing: -0.03em; }
+        .hero-stat-label { font-size: 0.78rem; color: var(--light); margin-top: 6px; font-weight: 500; }
+        .card { background: #fff; border: 1.5px solid var(--border); border-radius: var(--rad-lg); padding: 28px 24px; transition: transform var(--t), box-shadow var(--t); }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(45,158,88,0.1); }
+        .card h3 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+        .card p { font-size: 0.9rem; color: var(--mid); line-height: 1.72; }
+        .card-icon { width: 44px; height: 44px; margin-bottom: 16px; display: block; }
+        .card-center { text-align: center; }
+        .card-center .card-icon { margin: 0 auto 16px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+        .grid-2b { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+        .worries-section { background: #fff; }
+        .worry-persona { margin-top: 44px; background: var(--g5); border: 1.5px solid var(--g4); border-radius: var(--rad-lg); padding: 32px 36px; }
+        .worry-persona h3 { font-size: 1rem; font-weight: 700; margin-bottom: 18px; }
+        .persona-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; list-style: none; }
+        .persona-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; color: var(--mid); }
+        .persona-dot { width: 20px; height: 20px; border-radius: 50%; background: var(--g2); color: #fff; font-size: 0.65rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+        .choice-section { background: var(--g6); }
+        .choice-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+        .choice-visual { background: #fff; border: 1.5px solid var(--border); border-radius: var(--rad-lg); padding: 44px 36px; text-align: center; }
+        .choice-visual .card-icon { width: 60px; height: 60px; margin: 0 auto 16px; }
+        .choice-visual h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+        .choice-visual p { font-size: 0.9rem; color: var(--mid); }
+        .choice-content .section-title { text-align: left; }
+        .choice-content p { color: var(--mid); font-size: 0.93rem; margin-top: 12px; line-height: 1.75; }
+        .choice-highlight { background: var(--g5); border-left: 3px solid var(--g2); border-radius: 0 var(--rad-md) var(--rad-md) 0; padding: 14px 18px; margin-top: 20px; }
+        .choice-highlight p { font-size: 0.9rem; color: var(--g1); font-weight: 600; margin: 0; }
+        .benefits-section { background: #fff; }
+        .services-section { background: var(--g6); }
+        .flow-section { background: #fff; }
+        .flow-wrapper { max-width: 720px; margin: 0 auto; position: relative; }
+        .flow-line { position: absolute; left: 21px; top: 22px; bottom: 22px; width: 2px; background: linear-gradient(to bottom, var(--g2), var(--g4)); border-radius: 2px; }
+        .flow-step { display: flex; gap: 22px; margin-bottom: 16px; position: relative; z-index: 1; }
+        .flow-step:last-child { margin-bottom: 0; }
+        .flow-num { width: 44px; height: 44px; border-radius: 50%; background: var(--g1); color: #fff; font-size: 1rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 0 4px var(--g5); }
+        .flow-body { background: #fff; border: 1.5px solid var(--border); border-radius: var(--rad-md); padding: 20px 22px; flex: 1; }
+        .flow-body h3 { font-size: 0.97rem; font-weight: 700; margin-bottom: 5px; }
+        .flow-body p { font-size: 0.88rem; color: var(--mid); }
+        .faq-section { background: var(--g6); }
+        .faq-wrapper { max-width: 720px; margin: 0 auto; }
+        .faq-item { background: #fff; border: 1.5px solid var(--border); border-radius: var(--rad-md); margin-bottom: 12px; overflow: hidden; }
+        .faq-question { padding: 18px 22px; display: flex; align-items: flex-start; gap: 12px; }
+        .faq-q-badge { width: 26px; height: 26px; border-radius: 50%; background: var(--g2); color: #fff; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .faq-question p { font-weight: 700; font-size: 0.95rem; color: var(--text); margin: 0; padding-top: 2px; }
+        .faq-answer { padding: 0 22px 18px 60px; font-size: 0.9rem; color: var(--mid); line-height: 1.72; }
+        .cta-section { background: var(--g1); text-align: center; padding: 96px 0; position: relative; overflow: hidden; }
+        .cta-section::before { content: ''; position: absolute; width: 700px; height: 700px; background: radial-gradient(circle, rgba(255,255,255,0.05), transparent 65%); top: -250px; right: -150px; border-radius: 50%; pointer-events: none; }
+        .cta-section .section-label { background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.25); }
+        .cta-section .section-title { color: #fff; font-size: clamp(1.8rem, 4vw, 2.8rem); position: relative; }
+        .cta-section .section-sub { color: rgba(255,255,255,0.78); position: relative; }
+        .cta-section .btn-primary { background: #fff; color: var(--g1); box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+        .cta-section .btn-primary:hover { background: var(--g5); box-shadow: 0 8px 28px rgba(0,0,0,0.16); }
+        .cta-section .btn-ghost { border-color: rgba(255,255,255,0.4); color: #fff; }
+        .cta-section .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+        .cta-note { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 20px; position: relative; }
+        footer { background: #0e1f0e; color: rgba(255,255,255,0.5); text-align: center; padding: 28px 0; font-size: 0.8rem; }
+        @media (max-width: 900px) { .choice-inner { grid-template-columns: 1fr; gap: 28px; } .choice-visual { order: -1; } }
+        @media (max-width: 640px) { section { padding: 64px 0; } .hero { padding: 132px 0 68px; } .hero-stats { gap: 10px; } .hero-stat { min-width: calc(50% - 5px); } .cta-group { flex-direction: column; align-items: stretch; } .btn { width: 100%; } .flow-line { display: none; } .worry-persona { padding: 24px 18px; } .faq-answer { padding-left: 20px; } .sticky-nav { top: 8px; left: 8px; right: 8px; } }
     </style>
 </head>
 <body>
-
-    <!-- Sticky Navigation -->
     <nav class="sticky-nav">
         <div class="container">
-            <a href="#" class="nav-logo">🇯🇵 日本就職支援</a>
-            <a href="#contact" class="btn btn-primary nav-cta">無料相談</a>
+            <a href="#" class="nav-logo">日本就職支援</a>
+            <a href="#contact" class="btn btn-primary nav-cta">エンジニア相談する</a>
         </div>
     </nav>
-
-    <!-- ===== 1. HERO ===== -->
     <section class="hero" id="top">
+        <div class="hero-blob hero-blob-1"></div>
+        <div class="hero-blob hero-blob-2"></div>
         <div class="container">
-            <div class="hero-badge">🇯🇵 韓国人向け 日本就職サポート</div>
-            <h1>
-                日本で、<span>新しいキャリア</span>を<br>
-                スタートしませんか？
-            </h1>
-            <p class="hero-sub">
-                韓国の就職競争に疲れていませんか？<br>
-                日本には、あなたを必要としている企業がたくさんあります。
-            </p>
+            <div class="hero-badge">韓国人エンジニア向け 日本就職サポート</div>
+            <p class="hero-tagline">日本語力を活かして、日本でエンジニアとして働く。</p>
+            <h1>日本で、<span class="accent">エンジニアとしての</span><br><span class="accent">キャリアを始めませんか？</span></h1>
+            <p class="hero-sub">日本語でのやり取りができる韓国人エンジニアの方へ。日本には、あなたの経験やスキルを活かせる企業がたくさんあります。</p>
             <div class="cta-group">
-                <a href="#contact" class="btn btn-primary">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                    無料相談に申し込む
-                </a>
-                <a href="#contact" class="btn btn-kakao">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.477 3 2 6.582 2 11c0 2.85 1.84 5.352 4.625 6.812-.244.896-1.166 4.314-1.2 4.464-.042.188.064.2.164.135.08-.05 3.33-2.185 4.665-3.085.57.086 1.154.132 1.746.132 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg>
-                    カカオトークで相談
-                </a>
+                <a href="#contact" class="btn btn-primary">エンジニア相談に申し込む →</a>
+                <a href="#contact" class="btn btn-ghost">カカオトークで相談</a>
             </div>
-
             <div class="hero-stats">
-                <div class="hero-stat">
-                    <div class="hero-stat-num">500+</div>
-                    <div class="hero-stat-label">相談実績</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-num">200+</div>
-                    <div class="hero-stat-label">提携企業数</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-num">90%</div>
-                    <div class="hero-stat-label">内定獲得率</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-num">完全無料</div>
-                    <div class="hero-stat-label">求職者費用</div>
-                </div>
+                <div class="hero-stat"><div class="hero-stat-num">500+</div><div class="hero-stat-label">相談実績</div></div>
+                <div class="hero-stat"><div class="hero-stat-num">200+</div><div class="hero-stat-label">提携企業数</div></div>
+                <div class="hero-stat"><div class="hero-stat-num">90%</div><div class="hero-stat-label">選考通過率</div></div>
+                <div class="hero-stat"><div class="hero-stat-num">無料</div><div class="hero-stat-label">職種特化</div></div>
             </div>
         </div>
     </section>
-
-    <!-- ===== 2. WORRIES ===== -->
     <section class="worries-section">
         <div class="container">
-            <div class="worries-intro">
-                <span class="section-label">こんな悩みはありませんか？</span>
-                <h2 class="section-title">韓国の若者が感じる、キャリアの壁</h2>
-                <p class="section-sub">多くの韓国の若者が、同じ悩みを抱えています。あなただけではありません。</p>
+            <div class="text-center" style="margin-bottom:44px;">
+                <span class="section-label">こんな悩みない？</span>
+                <h2 class="section-title">韓国人エンジニアが感じやすい<br>キャリアの壁</h2>
+                <p class="section-sub">多くの韓国人エンジニアが、同じような悩みを抱えています。あなただけではありません。</p>
             </div>
-
-            <div class="worries-grid">
-                <div class="worry-card">
-                    <div class="worry-icon">😔</div>
-                    <h3>激しい就職競争</h3>
-                    <p>大学卒業後、希望の企業に入れなかった。競争が激しすぎて、自分の可能性を感じられない。</p>
-                </div>
-                <div class="worry-card">
-                    <div class="worry-icon">📉</div>
-                    <h3>キャリアの停滞</h3>
-                    <p>社会人3〜5年目で成長が見えにくくなった。このままでは将来が不安。</p>
-                </div>
-                <div class="worry-card">
-                    <div class="worry-icon">🌏</div>
-                    <h3>海外への憧れ</h3>
-                    <p>海外で働いてみたいけれど、具体的な方法が分からない。どこから始めればいいの？</p>
-                </div>
-                <div class="worry-card">
-                    <div class="worry-icon">🔮</div>
-                    <h3>将来への不安</h3>
-                    <p>今の仕事に限界を感じている。もっと可能性を広げたいが、どうすればいいか分からない。</p>
-                </div>
+            <div class="grid-4">
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><path d="M12 33c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="#4ecb71" stroke-width="2" stroke-linecap="round"/><circle cx="22" cy="18" r="5" stroke="#2d9e58" stroke-width="2"/><path d="M31 13l3-3M33 19h3" stroke="#4ecb71" stroke-width="1.8" stroke-linecap="round"/></svg><h3>激しい就職競争</h3><p>韓国でエンジニアとして働いていても、年収や開発環境、成長できる機会に物足りなさを感じる。もっと技術を活かせる環境で働きたい。</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><path d="M11 33V25M17 33V19M23 33V23M29 33V15" stroke="#4ecb71" stroke-width="2.2" stroke-linecap="round"/><path d="M9 17l5 4 5-3 5 4 5-5" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>キャリアの停滞</h3><p>エンジニアとして経験はあるのに、次に挑戦したい技術領域や役割が見つからない。このままでいいのか不安になる。</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><circle cx="22" cy="22" r="9" stroke="#4ecb71" stroke-width="1.8"/><path d="M22 13v-3M22 34v3M13 22h-3M34 22h3" stroke="#4ecb71" stroke-width="1.8" stroke-linecap="round"/><path d="M18 22c0-2.21 1.79-4 4-4s4 1.79 4 4-1.79 4-4 4" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/></svg><h3>海外への憧れ</h3><p>日本語はある程度できる。開発経験もある。でも、日本のエンジニア採用ってどう進むのか分からない。何から始めればいいの？</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><circle cx="22" cy="22" r="9" stroke="#4ecb71" stroke-width="1.8"/><path d="M22 16v7l5 3" stroke="#2d9e58" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>将来への不安</h3><p>今の環境では、自分の技術力が十分に評価されていない気がする。もっとスキルを活かせる開発現場に移りたいけれど、どう動けばいいか分からない。</p></div>
             </div>
-
             <div class="worry-persona">
-                <h3>このような方が相談に来ています</h3>
+                <h3>こんな方が相談に来ています</h3>
                 <ul class="persona-list">
-                    <li>大学卒業後、希望の企業に入れなかった方</li>
-                    <li>社会人3〜5年目でキャリアの停滞を感じている方</li>
-                    <li>海外で働きたいが方法が分からない方</li>
-                    <li>日本語を勉強中（初級〜中級）の方</li>
-                    <li>日本の文化や生活に興味がある方</li>
-                    <li>将来の可能性を広げたいと思っている方</li>
+                    <li><span class="persona-dot">✓</span>N2レベル以上の日本語力があるエンジニア経験者</li>
+                    <li><span class="persona-dot">✓</span>バックエンド、フロントエンド、モバイル、QA、インフラなどの経験がある方</li>
+                    <li><span class="persona-dot">✓</span>日本でエンジニアとして働きたいけれど、進め方が分からない方</li>
+                    <li><span class="persona-dot">✓</span>日本語での業務や面接に挑戦したい方</li>
+                    <li><span class="persona-dot">✓</span>日本企業の開発環境や働き方に興味がある方</li>
+                    <li><span class="persona-dot">✓</span>エンジニアとして、もっとできることを増やしたい方</li>
                 </ul>
             </div>
         </div>
     </section>
-
-    <!-- ===== 3. CHOICE ===== -->
     <section class="choice-section">
         <div class="container">
             <div class="choice-inner">
                 <div class="choice-visual">
-                    <div class="choice-visual-icon">🗼</div>
-                    <h3>日本は今、<br>グローバル人材を求めています</h3>
-                    <p>少子化が進む日本では、優秀な外国人材の採用に積極的な企業が増えています。韓国人の勤勉さと語学力は、日本企業に高く評価されています。</p>
+                    <svg class="card-icon" viewBox="0 0 60 60" fill="none"><rect width="60" height="60" rx="16" fill="#e8f9ee"/><path d="M16 50c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#4ecb71" stroke-width="2.2" stroke-linecap="round"/><circle cx="30" cy="24" r="8" stroke="#2d9e58" stroke-width="2.2"/><path d="M42 20l5-5M44 28h5M39 14l4-4" stroke="#4ecb71" stroke-width="2" stroke-linecap="round"/></svg>
+                    <h3>日本は今、海外のエンジニアにも目を向けています</h3>
+                    <p style="margin-top:10px;">日本ではエンジニア不足が続いており、日本語でコミュニケーションが取れる外国人エンジニアへの需要も高まっています。韓国人エンジニアの技術力や対応力は、多くの企業から評価されています。</p>
                 </div>
                 <div class="choice-content">
                     <span class="section-label">新しい選択肢</span>
                     <h2 class="section-title">日本で働くという<br>キャリアの選択</h2>
-                    <p>韓国の就職市場だけが、あなたの選択肢ではありません。日本という市場には、あなたのスキルと経験を活かせる場所が数多くあります。</p>
-                    <p>日本語を少し勉強しているなら、それはすでに大きなアドバンテージです。日本で働きながら、語学力もキャリアも同時に伸ばすことができます。</p>
-                    <div class="choice-highlight">
-                        <p>💡 日本語初級〜中級レベルから応募できる求人も多数あります。完璧な日本語は必要ありません。</p>
-                    </div>
+                    <p>韓国の開発市場だけが、あなたの選択肢ではありません。日本には、日本語力とエンジニア経験を活かせる場所がたくさんあります。</p>
+                    <p>日本語でやり取りできることは、大きな強みです。日本の開発現場で働きながら、技術力とキャリアの両方を伸ばしていけます。</p>
+                    <div class="choice-highlight"><p>日本語力を活かしやすく、エンジニア職として選考に進みやすい求人を中心にご案内します。</p></div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- ===== 4. BENEFITS ===== -->
     <section class="benefits-section">
         <div class="container">
             <div class="text-center">
-                <span class="section-label" style="background:rgba(255,255,255,0.15); color:var(--yellow);">日本で働くメリット</span>
-                <h2 class="section-title">日本でのキャリアが<br>あなたにもたらすもの</h2>
-                <p class="section-sub">日本での経験は、人生とキャリアを大きく変えます。</p>
+                <span class="section-label">日本で働くメリット</span>
+                <h2 class="section-title">日本でのエンジニア経験が<br>もたらすもの</h2>
+                <p class="section-sub">日本でのエンジニア経験は、これからのキャリアに大きな変化をもたらします。</p>
             </div>
-
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">📈</div>
-                    <h3>キャリアの成長</h3>
-                    <p>日本企業での実務経験は、グローバルキャリアを築く上で非常に価値があります。異なる市場での経験は、市場価値を高めます。</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🗣️</div>
-                    <h3>語学を活かせる仕事</h3>
-                    <p>韓国語・日本語・英語のマルチリンガルとして活躍できます。日本で働きながら日本語力を実践的に伸ばし、語学の強みをキャリアに直結させましょう。</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🌍</div>
-                    <h3>国際的な経験</h3>
-                    <p>異文化の中で働く経験は、グローバルな視野と柔軟な思考力を育てます。この経験は、将来どの国で働く場合にも大きな強みになります。</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">💰</div>
-                    <h3>安定した収入・生活</h3>
-                    <p>日本は安定した経済と高い生活水準を誇ります。充実した福利厚生と安全な生活環境の中で、安心してキャリアを積むことができます。</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🤝</div>
-                    <h3>グローバルなネットワーク</h3>
-                    <p>日本で働くことで、日本国内外のビジネスパーソンとのネットワークが広がります。このつながりは、将来のキャリアにとって大きな財産になります。</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">🎌</div>
-                    <h3>豊かな生活・文化体験</h3>
-                    <p>日本の文化・食・生活を日常として体験できます。韓国から近い距離感で、定期的に帰国しながら日本でのキャリアを築くことができます。</p>
-                </div>
+            <div class="grid-2b">
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><path d="M12 35V21l10-8 10 8v14" stroke="#4ecb71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="18" y="26" width="8" height="9" rx="1.5" stroke="#2d9e58" stroke-width="1.8"/></svg><h3>キャリアの成長</h3><p>日本企業での開発実務経験は、これからのキャリアを広げるうえで大きな強みになります。</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><path d="M14 22c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8" stroke="#4ecb71" stroke-width="1.8" stroke-linecap="round"/><path d="M18 18h8M18 22h6M18 26h4" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/></svg><h3>語学を活かせる仕事</h3><p>韓国語と日本語を活かして、ブリッジ業務やグローバル開発の現場で活躍できる可能性があります。語学の強みを、そのまま仕事に活かせます。</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><circle cx="22" cy="22" r="9" stroke="#4ecb71" stroke-width="1.8"/><path d="M22 13c0 0-4 4-4 9s4 9 4 9M22 13c0 0 4 4 4 9s-4 9-4 9M13 22h18" stroke="#2d9e58" stroke-width="1.6" stroke-linecap="round"/></svg><h3>国際的な経験</h3><p>日本の開発現場で働く経験は、グローバルな視野と実務での対応力を育ててくれます。</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><rect x="12" y="18" width="20" height="14" rx="3" stroke="#4ecb71" stroke-width="1.8"/><path d="M17 18v-2a5 5 0 0110 0v2M22 25v-2" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/><circle cx="22" cy="26" r="1.5" fill="#2d9e58"/></svg><h3>安定した収入・生活</h3><p>安定した雇用環境の中で、腰を据えてエンジニアとしての経験を積み上げていけます。</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><circle cx="22" cy="22" r="5" stroke="#2d9e58" stroke-width="1.8"/><circle cx="13" cy="16" r="3" stroke="#4ecb71" stroke-width="1.6"/><circle cx="31" cy="16" r="3" stroke="#4ecb71" stroke-width="1.6"/><circle cx="13" cy="28" r="3" stroke="#4ecb71" stroke-width="1.6"/><circle cx="31" cy="28" r="3" stroke="#4ecb71" stroke-width="1.6"/><path d="M16 18l4 3M28 18l-4 3M16 26l4-3M28 26l-4-3" stroke="#4ecb71" stroke-width="1.3"/></svg><h3>グローバルなネットワーク</h3><p>日本国内外のエンジニアや企業とのつながりが、将来の大きな財産になります。</p></div>
+                <div class="card"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><path d="M16 30c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="#4ecb71" stroke-width="1.8" stroke-linecap="round"/><path d="M22 10c6.627 0 12 5.373 12 12" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/><path d="M22 14c4.418 0 8 3.582 8 8" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/><circle cx="22" cy="18" r="2.5" fill="#4ecb71"/></svg><h3>豊かな生活・文化体験</h3><p>韓国から近い距離感の中で、生活面の不安を抑えながら日本でのキャリアを築いていけます。</p></div>
             </div>
         </div>
     </section>
-
-    <!-- ===== 5. SERVICES ===== -->
     <section class="services-section">
         <div class="container">
             <div class="text-center">
                 <span class="section-label">サービス内容</span>
-                <h2 class="section-title">私たちのサポート内容</h2>
-                <p class="section-sub">日本就職に必要なすべてのサポートを、一貫して提供します。</p>
+                <h2 class="section-title">エンジニア向けサポート内容</h2>
+                <p class="section-sub">日本でエンジニアとして働くために必要なサポートを、一貫して提供します。</p>
             </div>
-
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🏢</div>
-                    <h3>求人紹介</h3>
-                    <p>韓国人材を積極採用している日本企業の求人をご紹介。あなたのスキルと希望に合った企業を提案します。</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">💬</div>
-                    <h3>キャリア相談</h3>
-                    <p>あなたの経験・希望・不安を丁寧にヒアリング。最適なキャリアプランを一緒に考えます。</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📝</div>
-                    <h3>履歴書サポート</h3>
-                    <p>日本の採用担当者に響く、効果的な履歴書・職務経歴書の書き方をアドバイスします。</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🎯</div>
-                    <h3>面接対策</h3>
-                    <p>日本の面接マナーや頻出質問を事前に練習。自信を持って面接に臨めるようサポートします。</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">✈️</div>
-                    <h3>渡航・生活アドバイス</h3>
-                    <p>ビザ取得から住居探し、日本での生活準備まで、日本で働くためのアドバイスを提供します。</p>
-                </div>
+            <div class="grid-3">
+                <div class="card card-center"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><rect x="11" y="11" width="22" height="24" rx="3" stroke="#4ecb71" stroke-width="1.8"/><path d="M16 18h12M16 23h12M16 28h8" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/></svg><h3>求人紹介</h3><p>日本語でのコミュニケーションができるエンジニアを採用したい日本企業をご紹介します。あなたのスキルや希望に合った企業をご提案します。</p></div>
+                <div class="card card-center"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><path d="M14 30c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="#4ecb71" stroke-width="1.8" stroke-linecap="round"/><circle cx="22" cy="18" r="5" stroke="#2d9e58" stroke-width="1.8"/></svg><h3>キャリア相談</h3><p>開発経験、使ってきた技術、日本語力、希望条件を丁寧にヒアリングし、無理のないキャリアプランを一緒に考えます。</p></div>
+                <div class="card card-center"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><rect x="12" y="10" width="20" height="26" rx="2.5" stroke="#4ecb71" stroke-width="1.8"/><path d="M16 17h12M16 22h12M16 27h8" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/></svg><h3>履歴書サポート</h3><p>日本の採用担当者に伝わりやすい履歴書・職務経歴書や、技術の伝え方についてアドバイスします。</p></div>
+                <div class="card card-center"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><rect x="11" y="16" width="22" height="16" rx="3" stroke="#4ecb71" stroke-width="1.8"/><circle cx="18" cy="24" r="2.5" stroke="#2d9e58" stroke-width="1.6"/><path d="M24 20h6M24 24h6M24 28h4" stroke="#2d9e58" stroke-width="1.6" stroke-linecap="round"/></svg><h3>面接対策</h3><p>日本のエンジニア面接でよく聞かれる質問や、技術の説明の仕方を一緒に練習します。オンライン模擬面接で自信をつけていけます。</p></div>
+                <div class="card card-center"><svg class="card-icon" viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#e8f9ee"/><path d="M18 34l-8-10h6V12h8v12h6L18 34z" stroke="#4ecb71" stroke-width="1.8" stroke-linejoin="round"/><path d="M30 26h4M32 22v8" stroke="#2d9e58" stroke-width="1.8" stroke-linecap="round"/></svg><h3>渡航・生活アドバイス</h3><p>ビザ取得から住居探し、日本での生活準備まで、就職後のスタートも丁寧にサポートします。</p></div>
             </div>
         </div>
     </section>
-
-    <!-- ===== 6. FLOW ===== -->
     <section class="flow-section">
         <div class="container">
             <div class="text-center">
                 <span class="section-label">ステップ</span>
-                <h2 class="section-title">日本で働くまでの流れ</h2>
-                <p class="section-sub">相談から内定まで、すべてのステップをサポートします。</p>
+                <h2 class="section-title">日本でエンジニアとして働くまでの流れ</h2>
+                <p class="section-sub">相談から内定まで、エンジニア向けに一つひとつ丁寧にサポートします。</p>
             </div>
-
             <div class="flow-wrapper">
                 <div class="flow-line"></div>
+                <div class="flow-step"><div class="flow-num">1</div><div class="flow-body"><h3>エンジニア相談・カウンセリング</h3><p>まずはオンラインで気軽にご相談ください。開発経験、使用言語、日本語力、希望条件をお聞きし、日本就職の可能性を一緒に探っていきます。</p></div></div>
+                <div class="flow-step"><div class="flow-num">2</div><div class="flow-body"><h3>求人のご提案</h3><p>あなたの開発スキルや経験に合った日本企業の求人をご提案します。バックエンド、フロントエンド、モバイル、インフラなど、技術領域もふまえて最適な選択肢をご紹介します。</p></div></div>
+                <div class="flow-step"><div class="flow-num">3</div><div class="flow-body"><h3>書類作成・応募サポート</h3><p>日本式の履歴書・職務経歴書の作成をサポートします。エンジニア職向けに、応募書類の添削や改善アドバイスも行います。</p></div></div>
+                <div class="flow-step"><div class="flow-num">4</div><div class="flow-body"><h3>面接対策・練習</h3><p>日本のエンジニア面接で聞かれやすい内容や、技術説明の仕方を事前に練習します。オンライン模擬面接で自信をつけられます。</p></div></div>
+                <div class="flow-step"><div class="flow-num">5</div><div class="flow-body"><h3>内定・渡航準備サポート</h3><p>内定獲得後も安心。ビザ取得や渡航準備、日本での生活スタートまでサポートします。</p></div></div>
+            </div>
+        </div>
+    </section>
 
-                <div class="flow-step">
-                    <div class="flow-num">1</div>
-                    <div class="flow-body">
-                        <h3>無料相談・カウンセリング</h3>
-                        <p>まずはオンラインで気軽にご相談ください。あなたの希望・経験・不安をお聞きし、日本就職の可能性を一緒に探ります。</p>
-                    </div>
+    <section class="services-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="section-label">求人例</span>
+                <h2 class="section-title">実際にイメージしやすい<br>エンジニア求人の一例</h2>
+                <p class="section-sub">下記は、実際の公開求人で見られる条件感をもとに整理した参考イメージです。<br>タイミングや企業によって条件は変わりますが、応募の目安としてご覧ください。</p>
+            </div>
+            <div class="grid-3">
+                <div class="card card-center">
+                    <h3>バックエンド / Web開発</h3>
+                    <p><strong>想定レベル</strong><br>実務2〜5年程度 / Java・Python・Node.js などの開発経験 / 日本語N2前後</p>
+                    <p style="margin-top:12px;"><strong>想定年収</strong><br>500万円〜1,000万円前後</p>
+                    <p style="margin-top:12px;"><strong>福利厚生例</strong><br>フレックス、リモート可、各種社会保険、通勤交通費、ビザサポート</p>
                 </div>
-
-                <div class="flow-step">
-                    <div class="flow-num">2</div>
-                    <div class="flow-body">
-                        <h3>求人のご提案</h3>
-                        <p>あなたのプロフィールに合った日本企業の求人をご提案。希望条件や業界を考慮して、最適な選択肢をご紹介します。</p>
-                    </div>
+                <div class="card card-center">
+                    <h3>インフラ / ネットワーク</h3>
+                    <p><strong>想定レベル</strong><br>実務半年〜3年程度 / 運用保守・監視・ネットワーク対応の経験 / 日本語N2前後</p>
+                    <p style="margin-top:12px;"><strong>想定年収</strong><br>400万円〜800万円前後</p>
+                    <p style="margin-top:12px;"><strong>福利厚生例</strong><br>資格支援、研修制度、住宅補助ありの求人も一部、ビザサポート</p>
                 </div>
-
-                <div class="flow-step">
-                    <div class="flow-num">3</div>
-                    <div class="flow-body">
-                        <h3>書類作成・応募サポート</h3>
-                        <p>日本式の履歴書・職務経歴書の作成をサポート。応募書類の添削と改善アドバイスを行います。</p>
-                    </div>
-                </div>
-
-                <div class="flow-step">
-                    <div class="flow-num">4</div>
-                    <div class="flow-body">
-                        <h3>面接対策・練習</h3>
-                        <p>日本の面接マナーや頻出質問を事前に練習。オンライン模擬面接で自信をつけます。</p>
-                    </div>
-                </div>
-
-                <div class="flow-step">
-                    <div class="flow-num">5</div>
-                    <div class="flow-body">
-                        <h3>内定・渡航準備サポート</h3>
-                        <p>内定獲得後も安心。ビザ取得や渡航準備、日本での生活スタートまでサポートします。</p>
-                    </div>
+                <div class="card card-center">
+                    <h3>開発エンジニア / 社内SE</h3>
+                    <p><strong>想定レベル</strong><br>実務1〜3年程度 / C#・SQL・Webアプリ開発など / 日本語N2前後</p>
+                    <p style="margin-top:12px;"><strong>想定年収</strong><br>350万円〜800万円前後</p>
+                    <p style="margin-top:12px;"><strong>福利厚生例</strong><br>社会保険、賞与、残業代支給、研修、配属後フォロー</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== 7. FAQ ===== -->
     <section class="faq-section">
         <div class="container">
             <div class="text-center">
@@ -953,79 +266,34 @@
                 <h2 class="section-title">FAQ</h2>
                 <p class="section-sub">よくいただくご質問にお答えします。</p>
             </div>
-
             <div class="faq-wrapper">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <div class="faq-q-badge">Q</div>
-                        <p>日本語が完璧ではありませんが、応募できますか？</p>
-                    </div>
-                    <div class="faq-answer">はい、大丈夫です。日本語初級〜中級レベルから応募できる求人も多数あります。入社後に働きながら語学力を伸ばせる環境の企業もご紹介しています。まずはご相談ください。</div>
-                </div>
+                <div class="faq-item"><div class="faq-question"><div class="faq-q-badge">Q</div><p>N2レベルですが、技術面接や日本語での説明に自信がなくても応募できますか？</p></div><div class="faq-answer">はい、大丈夫です。今回はN2レベル以上を想定した求人が中心ですが、完璧な敬語よりも、実務でのコミュニケーション力やエンジニアとしての技術力を重視する企業も多くあります。面接での伝え方や受け答えは、こちらでしっかりサポートします。</div></div>
+                <div class="faq-item"><div class="faq-question"><div class="faq-q-badge">Q</div><p>相談や登録にお金はかかりますか？</p></div><div class="faq-answer">求職者の方への相談・サポートはすべて完全無料です。費用は一切かかりません。安心してご相談ください。</div></div>
+                <div class="faq-item"><div class="faq-question"><div class="faq-q-badge">Q</div><p>日本で働いた経験がなくても大丈夫ですか？</p></div><div class="faq-answer">もちろんです。日本での就職が初めてでも問題ありません。生活や文化の面も含めて丁寧にアドバイスします。面接もオンライン中心なので、渡航前に内定を獲得することも可能です。</div></div>
+                <div class="faq-item"><div class="faq-question"><div class="faq-q-badge">Q</div><p>どのような求人がありますか？</p></div><div class="faq-answer">主にバックエンド、フロントエンド、モバイル、QA、インフラ、社内SE、SRE、PM補佐などの求人を中心に取り扱っています。あなたの経験に合った求人をご提案します。</div></div>
+                <div class="faq-item"><div class="faq-question"><div class="faq-q-badge">Q</div><p>相談から内定まで、どのくらいの期間がかかりますか？</p></div><div class="faq-answer">個人の状況によって異なりますが、平均2〜4ヶ月程度です。急いでいる方には、より短期間でのサポートも対応しています。</div></div>
 
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <div class="faq-q-badge">Q</div>
-                        <p>相談や登録にお金はかかりますか？</p>
-                    </div>
-                    <div class="faq-answer">求職者の方への相談・サポートはすべて完全無料です。費用は一切かかりません。安心してご相談ください。</div>
-                </div>
+                <div class="faq-item"><div class="faq-question"><div class="faq-q-badge">Q</div><p>どのくらいの日本語力が必要ですか？</p></div><div class="faq-answer">日常会話レベルの日本語ができれば、応募できる求人もあります。面接での受け答えや伝え方に不安がある方でも大丈夫です。日本企業はスキルだけでなく、人柄や一緒に働きやすいかどうかを大切にする企業も多いため、その点も含めて面接対策や伝え方のサポートをこちらでしっかり行います。</div></div>
 
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <div class="faq-q-badge">Q</div>
-                        <p>日本に行ったことがありませんが、大丈夫ですか？</p>
-                    </div>
-                    <div class="faq-answer">もちろんです。日本での生活や文化についても丁寧にアドバイスします。面接もオンラインで行われることが多いため、渡航前に内定を獲得することが可能です。</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <div class="faq-q-badge">Q</div>
-                        <p>どのような職種・業界の求人がありますか？</p>
-                    </div>
-                    <div class="faq-answer">IT・エンジニア、営業、マーケティング、接客・サービス、製造、物流など幅広い職種・業界の求人を取り扱っています。あなたの経験やスキルに合った求人をご提案します。</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <div class="faq-q-badge">Q</div>
-                        <p>相談から内定まで、どのくらいの期間がかかりますか？</p>
-                    </div>
-                    <div class="faq-answer">個人の状況や希望条件によって異なりますが、平均的には2〜4ヶ月程度です。急いでいる方には、より短期間でのサポートも対応しています。</div>
-                </div>
             </div>
         </div>
     </section>
-
-    <!-- ===== 8. CTA ===== -->
     <section class="cta-section" id="contact">
         <div class="container">
-            <span class="section-label" style="background:rgba(255,255,255,0.15); color:var(--yellow);">無料相談受付中</span>
-            <h2 class="section-title">まずは、気軽に<br>お話ししませんか？</h2>
-            <p class="section-sub">あなたのキャリアの可能性を探る第一歩。<br>無料相談で、日本就職への道を一緒に考えましょう。</p>
-
+            <span class="section-label">エンジニア相談受付中</span>
+            <h2 class="section-title">まずは、気軽に相談してみませんか？</h2>
+            <p class="section-sub">あなたのキャリアの可能性を探る第一歩。<br>エンジニア相談で、日本就職への道を一緒に考えましょう。</p>
             <div class="cta-group">
-                <a href="#" class="btn btn-primary" style="font-size:1.1rem; padding:18px 44px;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                    無料相談に申し込む
-                </a>
-                <a href="#" class="btn btn-kakao" style="font-size:1.1rem; padding:18px 44px;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.477 3 2 6.582 2 11c0 2.85 1.84 5.352 4.625 6.812-.244.896-1.166 4.314-1.2 4.464-.042.188.064.2.164.135.08-.05 3.33-2.185 4.665-3.085.57.086 1.154.132 1.746.132 5.523 0 10-3.582 10-8s-4.477-8-10-8z"/></svg>
-                    カカオトークで相談
-                </a>
+                <a href="#" class="btn btn-primary" style="font-size:1.05rem; padding:17px 42px;">エンジニア相談に申し込む →</a>
+                <a href="#" class="btn btn-ghost" style="font-size:1.05rem; padding:17px 42px;">カカオトークで相談</a>
             </div>
-
-            <p class="cta-note">※ 相談・登録は完全無料です。しつこい営業は一切行いません。</p>
+            <p class="cta-note">※ 相談・登録は完全無料です。しつこい営業は一切しません。</p>
         </div>
     </section>
-
-    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2026 日本就職支援サービス. All Rights Reserved.</p>
+            <p>&copy; 2026 韓国人エンジニア向け 日本就職支援サービス. All Rights Reserved.</p>
         </div>
     </footer>
-
 </body>
 </html>
